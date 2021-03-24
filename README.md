@@ -20,4 +20,4 @@ numpy, scipy, dipy
 
 ## Demo
 The 3D MRI dataset is too large to run on a typical desktop computer, so usually we instead put it on a cluster with 40 cores. However, for the purpose of demonstration, we resampled the original sample data by 0.5 and reduced the data frames included. Here we take two sample cases. The paramters and instructions for running on the original large dataset can be found in getParams_original.m and the whole dataset can be downloaded at xxx.
-
+'01:20:45' for C371
