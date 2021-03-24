@@ -9,6 +9,7 @@ where (1) runs the main rOMT model on the dataset and (2-3) post-processes the r
 The code was mainly written and ran in Matlab (R2018a for rOMT algorithm and R2019b for post-processing), with a small section in GLaD analysis ran with Python 3.7.3. 
 
 ### Dependencies
+#### Dependencies
 (a) NIfTI_analyze https://www.mathworks.com/matlabcentral/fileexchange/8797-tools-for-nifti-and-analyze-image for loading and exporting nifty files <br />
 (b) vtkwrite https://www.mathworks.com/matlabcentral/fileexchange/47814-vtkwrite-exports-various-2d-3d-data-to-paraview-in-vtk-file-format for visualization in vtk format <br />
 
