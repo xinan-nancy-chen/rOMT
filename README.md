@@ -14,7 +14,7 @@ The code was mainly written and ran in Matlab (R2018a for rOMT algorithm and R20
 (b) vtkwrite https://www.mathworks.com/matlabcentral/fileexchange/47814-vtkwrite-exports-various-2d-3d-data-to-paraview-in-vtk-file-format for exporting mat to vtk format <br />
 #### Python
 numpy, scipy, dipy
-#### recommended software for visualization
+#### Recommended Doftware for Visualization
 (a) Amira 6.5.0 for speed map <br />
 (b) VisIt 3.0.2 for flux vectors <br />
 
