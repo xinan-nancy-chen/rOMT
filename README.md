@@ -10,8 +10,8 @@ The code was mainly written and ran in Matlab (R2018a for rOMT algorithm and R20
 
 ## Dependencies
 (a) NIfTI_analyze https://www.mathworks.com/matlabcentral/fileexchange/8797-tools-for-nifti-and-analyze-image for loading and exporting nifty files <br />
-(b) vtkwrite https://www.mathworks.com/matlabcentral/fileexchange/47814-vtkwrite-exports-various-2d-3d-data-to-paraview-in-vtk-file-format for visualization <br />
+(b) vtkwrite https://www.mathworks.com/matlabcentral/fileexchange/47814-vtkwrite-exports-various-2d-3d-data-to-paraview-in-vtk-file-format for visualization in vtk format <br />
 
 ## Demo
-The dataset is too large to run on a typical desktop computer, so in this demo we resampled the origial data by 0.5.
+The dataset is too large to run on a typical desktop computer, so in this demo we resampled the original data by 0.5.
 
