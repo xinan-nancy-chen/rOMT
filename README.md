@@ -1,8 +1,9 @@
-# regularized optimal mass transport (rOMT) applied in Glymphatic-Lymphatic fluid flows 
+# Regularized Optimal Mass Transport (rOMT) Applied in Glymphatic-Lymphatic fluid flows 
 This project includes code for <br />
 (1) rOMT algorithm <br />
 (2) Lagrangian representation of Glymphatic Dynamics (GLaD) analysis <br />
 (3) Neighborhood-based Cosine Analysis (NCA) <br />
+
 where (1) runs the main rOMT model on the dataset and (2-3) post-processes the results from (1).
 
 ![pipeline](pipeline.png)
@@ -21,5 +22,10 @@ numpy, scipy, dipy
 (b) VisIt 3.0.2 for flux vectors <br />
 
 ## Demo
-The 3D MRI dataset is too large to run on a typical desktop computer, so usually we instead put it on a cluster with 40 cores. However, for the purpose of demonstration, we resampled the original sample data by 0.5 and reduced the data frames included. Here we take two sample cases. The paramters and instructions for running on the original large dataset can be found in getParams_original.m and the whole dataset can be downloaded at xxx.
-'01:20:45' for C371
+The original 3D MRI dataset (each of size 100*106*100 and in total 11 frames) is too time and memory-consuming to run on a typical desktop computer, so usually we put it on a CPU cluster with 40 cores which may take about 24 hours to run. Even though it may lose lots of details and information, for the purpose of demonstration, we downsized the original sample data by 0.5 and reduced the data frames to 7. It takes about 70 minutes to run the sample data on a computer with 2.6 GHz Intel Core i7 and 16 GB memory. <br />
+### Instructions
+
+
+
+The paramters and instructions for running on the original large dataset can be found in getParams_original.m and the whole dataset can be available upon request.
+
