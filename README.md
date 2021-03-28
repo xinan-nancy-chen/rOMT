@@ -68,26 +68,7 @@ ________    ___________     __________________
   5.1	      4.40e+05 	     phit  = 4.13e+05        
   6.0	      4.13e+05 	     ||g|| = 1.04e+05       
   6.1	      4.13e+05 	     phit  = 3.81e+05        
-tind = 1, max(u) = 1.8661
-tind = 2
- =============== Descent on u ===============
-______________________________________________
-
-i.lsiter	phi    	      descent output
-________    ___________     __________________
-  1.0	      1.24e+06 	     ||g|| = 2.12e+05       
-  1.1	      1.24e+06 	     phit  = 1.01e+06        
-  2.0	      1.01e+06 	     ||g|| = 1.55e+05       
-  2.1	      1.01e+06 	     phit  = 7.03e+05        
-  3.0	      7.03e+05 	     ||g|| = 1.04e+05        
-  3.1	      7.03e+05 	     phit  = 6.19e+05        
-  4.0	      6.19e+05 	     ||g|| = 9.14e+04       
-  4.1	      6.19e+05 	     phit  = 5.32e+05        
-  5.0	      5.32e+05 	     ||g|| = 7.55e+04       
-  5.1	      5.32e+05 	     phit  = 4.87e+05        
-  6.0	      4.87e+05 	     ||g|| = 7.42e+04       
-  6.1	      4.87e+05 	     phit  = 4.51e+05        
-tind = 2, max(u) = 1.7551     
+tind = 1, max(u) = 1.8661  
 ```
 ...
 ```
@@ -221,6 +202,5 @@ Files in vtk format will be saved into the above directory which could be best v
 
 ![VisIt](VisIt.png)
 
-
-The paramters and instructions for running on the original large dataset can be found in getParams_original.m and the whole dataset can be available upon request at <xinan.chen@stonybrook.edu> or <helene.benveniste@yale.edu>.
+The above interface demonstrates the results from the original data. The paramters for running on the original large dataset can be found in the comment of ```getParams.m``` and the whole dataset is available upon request at <xinan.chen@stonybrook.edu> or <helene.benveniste@yale.edu>.
 
