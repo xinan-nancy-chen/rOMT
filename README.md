@@ -18,8 +18,8 @@ The code was mainly written and ran in Matlab (R2018a for rOMT algorithm and R20
 #### Python
 numpy, scipy, dipy
 #### Recommended Software for Visualization
-(a) Amira 6.5.0 for speed map <br />
-(b) VisIt 3.0.2 for flux vectors <br />
+(a) Amira 6.5.0 for speed map (may require purchase)<br />
+(b) VisIt 3.0.2 for flux vectors (open source)<br />
 
 ## Demo
 The original 3D MRI dataset (each of size 100x106x100 and in total 11 frames) is too time and memory-consuming to run on a typical desktop computer, so usually we put it on a CPU cluster with 40 cores. Even though it may lose lots of details and information, for the purpose of demonstration, we downsized the original sample data by 0.5 and reduced the data frames to 7. It takes about 70 minutes to run the sample data with default parameters on a computer with 2.6 GHz Intel Core i7 and 16 GB memory. <br />
@@ -30,7 +30,7 @@ To run the rOMT algorithm:<br />
 (1) Set data directory, model parameters etc. in ```getParams.m```. You can skip this step by using the default parameters within.<br />
 (2) Run ```driver.m```.<br />
 
-You are expected to see output like the following (subject to some changes dependent on the paramters in ```getParams.m```):<br />
+You are expected to see output like the following (subject to changes dependent on the paramters in ```getParams.m```):<br />
 ```
 =============== rOMT Starts ===============
 ______________________________________________
@@ -87,20 +87,27 @@ ________    ___________     __________________
   5.1	      5.32e+05 	     phit  = 4.87e+05        
   6.0	      4.87e+05 	     ||g|| = 7.42e+04       
   6.1	      4.87e+05 	     phit  = 4.51e+05        
-tind = 2, max(u) = 1.7551
-tind = 3
+tind = 2, max(u) = 1.7551     
+```
+...
+```
+tind = 7
  =============== Descent on u ===============
 ______________________________________________
 
 i.lsiter	phi    	      descent output
 ________    ___________     __________________
-  1.0	      1.48e+06 	     ||g|| = 1.83e+05       
-  1.1	      1.48e+06 	     phit  = 1.22e+06        
-  2.0	      1.22e+06 	     ||g|| = 1.33e+05       
+  1.0	      8.96e+05 	     ||g|| = 1.40e+05       
+  1.1	      8.96e+05 	     phit  = 7.80e+05        
+  2.0	      7.80e+05 	     ||g|| = 7.08e+04       
+  2.1	      7.80e+05 	     phit  = 5.72e+05        
+  3.0	      5.72e+05 	     ||g|| = 4.31e+04       
 ```
-...
-```
-```
+
+To run post-processing:<br />
+(1) Set directory in ```getParams.m```. Skip this step if you are processing the same rOMT output from the previous section.<br />
+(2) Run ```getGLAD.m```.<br />
+
 
 
 The paramters and instructions for running on the original large dataset can be found in getParams_original.m and the whole dataset can be available upon request.
