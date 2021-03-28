@@ -133,7 +133,7 @@ Then press Enter to continue
 ```
 Follow the instructions to choose what post-processing result you would like to run.<br />
 
-For speed map, you will need to run a script of Python:
+For speed map, you will need to run a script of Python, before which you will see output like:
 ```
 Lagrangian-Pathline (C294 data, mask = 1, affSmooth = 1, dilate = 3), 
 analysis type = speedmap
@@ -151,7 +151,6 @@ t = 5 (t1 = 31, t2 = 5 -> T = 32.200)
 ```
 ...
 ```
-t = 65 (t1 = 49, t2 = 5 -> T = 50.200)
 t = 66 (t1 = 49, t2 = 6 -> T = 50.500)
 t = 67 (t1 = 49, t2 = 7 -> T = 50.800)
 t = 68 (t1 = 49, t2 = 8 -> T = 51.100)
@@ -170,7 +169,7 @@ Directly run run_dipyQB_pl.py with Python also in this directory.
 Results will be saved automatically.
 Then come back to Matlab and press any key to continue.
 ```
-Run ```run_dipyQB_pl.py``` following the instructions.
+Run ```run_dipyQB_pl.py``` following the instructions and next you will see the following:
 ```
 ...Matlab code sucessfully continues...
  # of original clusters = 89
@@ -178,8 +177,41 @@ Run ```run_dipyQB_pl.py``` following the instructions.
  # of clusters after max-cluster-number (clus_cutoff) threshold = 44
 Speed Map in nifty format saved in ../rOMT/test_results/C294/diff_2e3_mask_1_tj_3_dt_0.4_nt_10_ti_31_tf_49_uini_0_rini_none_beta_0.0001_R_gamma_0.008_correctHu_dtri1_tinterp0_rmin0_rnorm0_rsmooth1_rreinit0_source0_dilate3_pcg20/LPPA_set001_032821
 ```
+A 3D rendering of the speed map will be plotted in Matlab, and a file in nifty format will be saved into the above directory which could be best visualized in Amira. <br />
+
+For flux vectors, you will see output like:
+```
+Lagrangian-Pathline (C294 data, mask = 1, affSmooth = 1, dilate = 3), 
+analysis type = vectors
+ 
+flw_type = vel, img = R, mdt = 10(T), altSPmsk0, spErode = 0, spDilate = 0, nEulStep= 1, 
+cutoffStr = min, concThresh = 0.0001, spdThresh = 0.0001, minIm0 = 0, spDISTordered-fs1, slTol = 2, 
+NNnum_tol_20_||_stdcut_0.50_wmeancut_[0.50,1.00]_Npcut_1_Avepathlcut_8.0
+NNnum_tol_10_||_stdcut_0.40_wmeancut_[0.60,1.00]_Npcut_1_Avepathlcut_10.0|pathlcut_10.0
+diff = 2e3, tj = 3, nt = 10_set002_032821
+
+t = 1 (t1 = 31, t2 = 1 -> T = 31.000)
+t = 2 (t1 = 31, t2 = 2 -> T = 31.300)
+t = 3 (t1 = 31, t2 = 3 -> T = 31.600)
+t = 4 (t1 = 31, t2 = 4 -> T = 31.900)
+t = 5 (t1 = 31, t2 = 5 -> T = 32.200)
+```
+...
+```
+t = 66 (t1 = 49, t2 = 6 -> T = 50.500)
+t = 67 (t1 = 49, t2 = 7 -> T = 50.800)
+t = 68 (t1 = 49, t2 = 8 -> T = 51.100)
+t = 69 (t1 = 49, t2 = 9 -> T = 51.400)
+t = 70 (t1 = 49, t2 = 10 -> T = 51.700)
+ # of start points = 12463
+ # of effective pathlines after pathline-number (pln) threshold = 12423 
+ # of effective pathlines after Euclidean dist (sl_tol) threshold = 10450
+C294: LPPA_set002_032821 Directory exists :)
+Total original 10450 pathlines
+After further dilate to add more ADV, 1084 vectors are added among 4509 candidates to 4991 already ADV vectors
+Flux vectors in vtk format saved in ../rOMT/test_results/C294/diff_2e3_mask_1_tj_3_dt_0.4_nt_10_ti_31_tf_49_uini_0_rini_none_beta_0.0001_R_gamma_0.008_correctHu_dtri1_tinterp0_rmin0_rnorm0_rsmooth1_rreinit0_source0_dilate3_pcg20/LPPA_set002_032821
+```
 
 
-
-The paramters and instructions for running on the original large dataset can be found in getParams_original.m and the whole dataset can be available upon request.
+The paramters and instructions for running on the original large dataset can be found in getParams_original.m and the whole dataset can be available upon request at xinan.chen@stonybrook.edu or helene.benveniste@yale.edu.
 
