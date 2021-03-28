@@ -27,10 +27,10 @@ The original 3D MRI dataset (each of size 100x106x100 and in total 11 frames) is
 ### Instructions
 
 To run the rOMT algorithm:<br />
-(1) Set model parameters, data directory in ```getParams.m```. You can skip this step by using the default parameters within.<br />
+(1) Set data directory, model parameters etc. in ```getParams.m```. You can skip this step by using the default parameters within.<br />
 (2) Run ```driver.m```.<br />
 
-You are expected to see output like the following:<br />
+You are expected to see output like the following (subject to some changes dependent on the paramters in ```getParams.m```):<br />
 ```
 =============== rOMT Starts ===============
 ______________________________________________
@@ -49,8 +49,58 @@ ______________________________________________
  start frame:	31
  end frame:	52
  frame jump:	3
-```
+ 
+ tind = 1
+ =============== Descent on u ===============
+______________________________________________
 
+i.lsiter	phi    	      descent output
+________    ___________     __________________
+  1.0	      1.15e+06 	     ||g|| = 2.78e+05       
+  1.1	      1.15e+06 	     phit  = 8.67e+05        
+  2.0	      8.67e+05 	     ||g|| = 1.92e+05       
+  2.1	      8.67e+05 	     phit  = 5.81e+05        
+  3.0	      5.81e+05 	     ||g|| = 1.27e+05       
+  3.1	      5.81e+05 	     phit  = 5.16e+05        
+  4.0	      5.16e+05 	     ||g|| = 1.13e+05       
+  4.1	      5.16e+05 	     phit  = 4.40e+05        
+  5.0	      4.40e+05 	     ||g|| = 1.15e+05       
+  5.1	      4.40e+05 	     phit  = 4.13e+05        
+  6.0	      4.13e+05 	     ||g|| = 1.04e+05       
+  6.1	      4.13e+05 	     phit  = 3.81e+05        
+tind = 1, max(u) = 1.8661
+tind = 2
+ =============== Descent on u ===============
+______________________________________________
+
+i.lsiter	phi    	      descent output
+________    ___________     __________________
+  1.0	      1.24e+06 	     ||g|| = 2.12e+05       
+  1.1	      1.24e+06 	     phit  = 1.01e+06        
+  2.0	      1.01e+06 	     ||g|| = 1.55e+05       
+  2.1	      1.01e+06 	     phit  = 7.03e+05        
+  3.0	      7.03e+05 	     ||g|| = 1.04e+05        
+  3.1	      7.03e+05 	     phit  = 6.19e+05        
+  4.0	      6.19e+05 	     ||g|| = 9.14e+04       
+  4.1	      6.19e+05 	     phit  = 5.32e+05        
+  5.0	      5.32e+05 	     ||g|| = 7.55e+04       
+  5.1	      5.32e+05 	     phit  = 4.87e+05        
+  6.0	      4.87e+05 	     ||g|| = 7.42e+04       
+  6.1	      4.87e+05 	     phit  = 4.51e+05        
+tind = 2, max(u) = 1.7551
+tind = 3
+ =============== Descent on u ===============
+______________________________________________
+
+i.lsiter	phi    	      descent output
+________    ___________     __________________
+  1.0	      1.48e+06 	     ||g|| = 1.83e+05       
+  1.1	      1.48e+06 	     phit  = 1.22e+06        
+  2.0	      1.22e+06 	     ||g|| = 1.33e+05       
+```
+...
+```
+```
 
 
 The paramters and instructions for running on the original large dataset can be found in getParams_original.m and the whole dataset can be available upon request.
