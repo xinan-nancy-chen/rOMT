@@ -217,6 +217,11 @@ Files in vtk format will be saved into the above directory which could be best v
 (2) Load anatomical data ("anato") -> Add -> Volume -> mask -> Draw. Then double click the item to change attributes of colormap and transparency.<br />
 (3) Load vectors ("ADV", "DIFF","disp") -> Add -> Vector -> vector_field -> Draw. Then double click the item to change attributes of colormap, vector amount and scale.<br />
 (4) Load pathlines ("pathlines") -> Pseudocolor -> PathPoint -> Draw.<br />
+(5) Clike "Hide/Show" to overlay different layers.<br />
+
+![demo_vectors](demo_vectors.png)
+![demo_pathlines](demo_pathlines.png)
+
 
 The paramters and instructions for running on the original large dataset can be found in getParams_original.m and the whole dataset can be available upon request at <xinan.chen@stonybrook.edu> or <helene.benveniste@yale.edu>.
 
