@@ -6,7 +6,7 @@ This project includes code for <br />
 
 where (1) runs the main rOMT model on the dataset and (2-3) post-processes the results from (1).
 
-
+![pipeline](pipeline.png)
 
 ## System Requirements
 The code was mainly written and ran in Matlab (R2018a for rOMT algorithm and R2019b for post-processing), with a small section in GLaD analysis ran with Python 3.7.3. 
