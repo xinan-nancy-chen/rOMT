@@ -131,6 +131,54 @@ _________________________________________________________
 Type "s" for speed map, "v" for flux vectors, "b" for both. 
 Then press Enter to continue
 ```
+Follow the instructions to choose what post-processing result you would like to run.<br />
+
+For speed map, you will need to run a script of Python:
+```
+Lagrangian-Pathline (C294 data, mask = 1, affSmooth = 1, dilate = 3), 
+analysis type = speedmap
+ 
+flw_type = vel, img = R, mdt = 10(T), altSPmsk0, spErode = 0, spDilate = 0, nEulStep= 1, 
+cutoffStr = min, concThresh = 0.0001, spdThresh = 0.0001, minIm0 = 0, spDISTordered-fs5, slTol = 2, 
+clusters, centroid = 0, nbp = 124, metric = AvgPwEuc, qbthresh = 4, clusTol = 12, clusCutoff = 600, 
+diff = 2e3, tj = 3, nt= 10_dpsnrv_min_12_set001_032821
+
+t = 1 (t1 = 31, t2 = 1 -> T = 31.000)
+t = 2 (t1 = 31, t2 = 2 -> T = 31.300)
+t = 3 (t1 = 31, t2 = 3 -> T = 31.600)
+t = 4 (t1 = 31, t2 = 4 -> T = 31.900)
+t = 5 (t1 = 31, t2 = 5 -> T = 32.200)
+```
+...
+```
+t = 65 (t1 = 49, t2 = 5 -> T = 50.200)
+t = 66 (t1 = 49, t2 = 6 -> T = 50.500)
+t = 67 (t1 = 49, t2 = 7 -> T = 50.800)
+t = 68 (t1 = 49, t2 = 8 -> T = 51.100)
+t = 69 (t1 = 49, t2 = 9 -> T = 51.400)
+t = 70 (t1 = 49, t2 = 10 -> T = 51.700)
+ # of start points = 1927
+ # of effective pathlines after pathline-number (pln) threshold = 1921 
+ # of effective pathlines after Euclidean dist (sl_tol) threshold = 1771
+
+======= waiting to run run_dipyQB_pl.py =======
+
+Instructions:
+
+pl_cur.mat has been saved at the current directory.
+Directly run run_dipyQB_pl.py with Python also in this directory.
+Results will be saved automatically.
+Then come back to Matlab and press any key to continue.
+```
+Run ```run_dipyQB_pl.py``` following the instructions.
+```
+...Matlab code sucessfully continues...
+ # of original clusters = 89
+ # of clusters after cluster-length (clus_tol) threshold = 44
+ # of clusters after max-cluster-number (clus_cutoff) threshold = 44
+Speed Map in nifty format saved in ../rOMT/test_results/C294/diff_2e3_mask_1_tj_3_dt_0.4_nt_10_ti_31_tf_49_uini_0_rini_none_beta_0.0001_R_gamma_0.008_correctHu_dtri1_tinterp0_rmin0_rnorm0_rsmooth1_rreinit0_source0_dilate3_pcg20/LPPA_set001_032821
+```
+
 
 
 The paramters and instructions for running on the original large dataset can be found in getParams_original.m and the whole dataset can be available upon request.
