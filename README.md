@@ -133,7 +133,7 @@ Then press Enter to continue
 ```
 Follow the instructions to choose what post-processing result you would like to run.<br />
 
-For speed map, you will need to run a script of Python, before which you will see output like:
+Type 1: For speed map, you will need to run a script of Python, before which you will see output like:
 ```
 Lagrangian-Pathline (C294 data, mask = 1, affSmooth = 1, dilate = 3), 
 analysis type = speedmap
@@ -169,7 +169,7 @@ Directly run run_dipyQB_pl.py with Python also in this directory.
 Results will be saved automatically.
 Then come back to Matlab and press any key to continue.
 ```
-Run ```run_dipyQB_pl.py``` following the instructions and next you will see the following:
+Run ```run_dipyQB_pl.py``` by following the instructions and next you will see:
 ```
 ...Matlab code sucessfully continues...
  # of original clusters = 89
@@ -179,7 +179,7 @@ Speed Map in nifty format saved in ../rOMT/test_results/C294/diff_2e3_mask_1_tj_
 ```
 A 3D rendering of the speed map will be plotted in Matlab, and a file in nifty format will be saved into the above directory which could be best visualized in Amira. <br />
 
-For flux vectors, you will see output like:
+Type 2: For flux vectors, you will see output like:
 ```
 Lagrangian-Pathline (C294 data, mask = 1, affSmooth = 1, dilate = 3), 
 analysis type = vectors
@@ -211,7 +211,12 @@ Total original 10450 pathlines
 After further dilate to add more ADV, 1084 vectors are added among 4509 candidates to 4991 already ADV vectors
 Flux vectors in vtk format saved in ../rOMT/test_results/C294/diff_2e3_mask_1_tj_3_dt_0.4_nt_10_ti_31_tf_49_uini_0_rini_none_beta_0.0001_R_gamma_0.008_correctHu_dtri1_tinterp0_rmin0_rnorm0_rsmooth1_rreinit0_source0_dilate3_pcg20/LPPA_set002_032821
 ```
+Files in vtk format will be saved into the above directory which could be best visualized in VisIt:<br />
 
+(1) Open VisIt and clike "Open" icon to load data.<br />
+(2) Load anatomical data ("anato") -> Add -> Volume -> mask -> Draw. Then double click the item to change attributes of colormap and transparency.<br />
+(3) Load vectors ("ADV", "DIFF","disp") -> Add -> Vector -> vector_field -> Draw. Then double click the item to change attributes of colormap, vector amount and scale.<br />
+(4) Load pathlines ("pathlines") -> Pseudocolor -> PathPoint -> Draw.<br />
 
-The paramters and instructions for running on the original large dataset can be found in getParams_original.m and the whole dataset can be available upon request at xinan.chen@stonybrook.edu or helene.benveniste@yale.edu.
+The paramters and instructions for running on the original large dataset can be found in getParams_original.m and the whole dataset can be available upon request at <xinan.chen@stonybrook.edu> or <helene.benveniste@yale.edu>.
 
