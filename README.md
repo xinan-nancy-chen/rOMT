@@ -26,9 +26,9 @@ The original 3D MRI dataset (each of size 100x106x100 and in total 11 frames) is
 
 ### Instructions
 
-To run the rOMT algorithm:
-(1) Set model parameters, data directory in getParams.m. You can use the default parameters within.<br />
-(2) Run driver.m.<br />
+To run the rOMT algorithm:<br />
+(1) Set model parameters, data directory in ```getParams.m```. You can skip this step by using the default parameters within.<br />
+(2) Run ```driver.m```.<br />
 
 You are expected to see output like the following:<br />
 ```
