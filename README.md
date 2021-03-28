@@ -22,8 +22,34 @@ numpy, scipy, dipy
 (b) VisIt 3.0.2 for flux vectors <br />
 
 ## Demo
-The original 3D MRI dataset (each of size 100*106*100 and in total 11 frames) is too time and memory-consuming to run on a typical desktop computer, so usually we put it on a CPU cluster with 40 cores which may take about 24 hours to run. Even though it may lose lots of details and information, for the purpose of demonstration, we downsized the original sample data by 0.5 and reduced the data frames to 7. It takes about 70 minutes to run the sample data on a computer with 2.6 GHz Intel Core i7 and 16 GB memory. <br />
+The original 3D MRI dataset (each of size 100x106x100 and in total 11 frames) is too time and memory-consuming to run on a typical desktop computer, so usually we put it on a CPU cluster with 40 cores. Even though it may lose lots of details and information, for the purpose of demonstration, we downsized the original sample data by 0.5 and reduced the data frames to 7. It takes about 70 minutes to run the sample data with default parameters on a computer with 2.6 GHz Intel Core i7 and 16 GB memory. <br />
+
 ### Instructions
+
+To run the rOMT algorithm:
+(1) Set model parameters, data directory in getParams.m. You can use the default parameters within.<br />
+(2) Run driver.m.<br />
+
+You are expected to see output like the following:<br />
+```
+=============== rOMT Starts ===============
+______________________________________________
+
+ tag:		C294
+ dataset:	CAA
+ sigma:		0.0020
+ gamma:		0.0080
+ beta:		0.0001
+ nt:		10
+ dt:		0.40
+ pcg:		20
+ mask:		1
+ do_resize:	1
+ resize_factor:	0.50
+ start frame:	31
+ end frame:	52
+ frame jump:	3
+```
 
 
 
