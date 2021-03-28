@@ -27,7 +27,7 @@ The original 3D MRI dataset (each of size 100x106x100 and in total 11 frames) is
 ### Instructions
 
 To run the rOMT algorithm:<br />
-(1) Set data directory, model parameters etc. in ```getParams.m```. You can skip this step by using the default parameters within.<br />
+(1) Set data directory, model parameters etc. in ```getParams.m``` and set the same tag name in line 6 of ```driver.m```. You can skip this step by using the default parameters and tag name within.<br />
 (2) Run ```driver.m```.<br />
 
 You are expected to see output like the following (subject to changes dependent on the paramters in ```getParams.m```):<br />
@@ -118,8 +118,19 @@ tind = 7, max(u) = 3.1690
 
 To run post-processing:<br />
 (1) Set directory in ```getParams.m```. Skip this step if you are processing the same rOMT output from the previous section.<br />
-(2) Run ```getGLAD.m```.<br />
+(2) Set the tag name you want to process in line 10 of ```getGLAD.m```. Skip this step if you are running in default.<br />
+(3) Run ```getGLAD.m```.<br />
 
+You are expected to see output like the following (subject to changes):<br />
+```
+ =============== Post-processing Starts ===============
+_________________________________________________________
+
+
+=== What result do you want to extract? === 
+Type "s" for speed map, "v" for flux vectors, "b" for both. 
+Then press Enter to continue
+```
 
 
 The paramters and instructions for running on the original large dataset can be found in getParams_original.m and the whole dataset can be available upon request.
