@@ -6,7 +6,7 @@ This project includes code for <br />
 
 where (1) runs the main rOMT model on the dataset and (2-3) post-processes the results from (1).<br />
 
-For detailed mathematical derivation and explaination of (1), please go to https://github.com/xinan-nancy-chen/rOMT/rOMT_code_details.pdf in the current folder.<br />
+For detailed mathematical derivation and explaination of (1), please go to https://github.com/xinan-nancy-chen/rOMT/tree/main/rOMT_code_details.pdf in the current folder.<br />
 
 ![pipeline](ppl.png)
 
