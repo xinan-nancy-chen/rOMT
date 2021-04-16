@@ -17,7 +17,7 @@ The code was mainly written and ran in Matlab (R2018a for rOMT algorithm and R20
 #### Matlab
 (a) NIfTI_analyze https://www.mathworks.com/matlabcentral/fileexchange/8797-tools-for-nifti-and-analyze-image for loading and exporting nifty files <br />
 (b) vtkwrite https://www.mathworks.com/matlabcentral/fileexchange/47814-vtkwrite-exports-various-2d-3d-data-to-paraview-in-vtk-file-format for exporting mat to vtk format <br />
-#### Python
+#### Python (only for post-processing)
 numpy, scipy, dipy
 #### Recommended Software for Visualization
 (a) Amira 6.5.0 for speed map (may require purchase)<br />
