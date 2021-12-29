@@ -202,7 +202,7 @@ Files in vtk format will be saved into the above directory which could be best v
 (4) Load pathlines ("pathlines") -> Pseudocolor -> PathPoint -> Draw. Then double click the item to change attributes of colormap and limits. <br />
 (5) Clike "Hide/Show" to overlay different layers.<br />
 
-![VisIt](VisIt.png)
+![VisIt](VisIt_exp.png)
 
 The above interface demonstrates the results from the original data. The paramters for running on the original large dataset can be found in the comment of ```getParams.m``` and the whole dataset is available upon request at <xinan.chen@stonybrook.edu> or <helene.benveniste@yale.edu>.
 
