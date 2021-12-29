@@ -1,7 +1,7 @@
 function gladpar = getGLADpar(tag,type)
 % Created by Xinan Chen on 03/24/2021.
 % This function returns parameters corresponding to the input 'data_name' and analysis type
-%   Input:  type  := 's' if run for speed map; 'v' if run for flux vectors
+%   Input:  type  := 's' if run for speed and Peclet maps; 'v' if run for pathlines w./w.o. endowed values
 %   Output: 'glad_par' := structure containing parameters for GLAD analysis
 
 %%
