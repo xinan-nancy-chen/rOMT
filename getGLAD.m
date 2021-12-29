@@ -14,10 +14,10 @@ tag = 'C294';
 %%
 fprintf('\n =============== Post-processing Starts ===============\n')
 fprintf('_________________________________________________________\n\n')
-prompt = '\n=== What result do you want to extract? === \nType "s" for speed map, "v" for flux vectors, "b" for both. \nThen press Enter to continue\n';
+prompt = '\n=== What result do you want to extract? === \nType "s" for speed and Peclet maps, "v" for pathlines w./w.o. endowed values, "b" for both. \nThen press Enter to continue\n';
 str = input(prompt,'s');
 
-switch str %'s' if run for speed map; 'v' if run for flux vectors
+switch str %'s' if run for speed and Peclet maps; 'v' if run for pathlines w./w.o. endowed values
     case 's'
         types = {'s'};
     case 'v'
@@ -203,9 +203,11 @@ SL = cell(1,nsp);
 RHO_SL = cell(1,nsp);
 AUGSPD_SL = cell(1,nsp);
 SPD_SL = cell(1,nsp);
+DSPD_SL = cell(1,nsp);
 T_SL = cell(1,nsp); %store timestep
 FLX_SL = cell(1,nsp); %store flux
 dR_SL = cell(1,nsp); %store drho/dt
+PE_SL = cell(1,nsp); % store peclet
 
 % Initialize masks
 maskCluster = model_mask;
@@ -215,6 +217,7 @@ maskAugSpeed = model_mask;
 maskTime = model_mask;
 maskFlux = model_mask;
 maskdRho = model_mask;
+maskPe = model_mask;
 
 % make sure don't use sl-info from previous timestep
 File1 = fullfile(cd, 'pl_cur.mat');
@@ -234,6 +237,7 @@ end
 pl = NaN(npoints,3,length(ti:tj:tf)*nt*gladpar.nEulStep+1);
 plrho = NaN(npoints,length(ti:tj:tf)*nt*gladpar.nEulStep+1);
 plspd = NaN(npoints,length(ti:tj:tf)*nt*gladpar.nEulStep+1);
+pldspd = NaN(npoints,length(ti:tj:tf)*nt*gladpar.nEulStep+1);
 plaugspd = NaN(npoints,length(ti:tj:tf)*nt*gladpar.nEulStep+1);
 plt = NaN(npoints,length(ti:tj:tf)*nt*gladpar.nEulStep+1);
 plflx = NaN(npoints,length(ti:tj:tf)*nt*gladpar.nEulStep+1);
@@ -294,6 +298,8 @@ for t1 = ti:tj:tf
         u2 = v2 - mpar.sigma.*w2;
         u3 = v3 - mpar.sigma.*w3;
         
+        du = mpar.sigma*[w1(:),w2(:),w3(:)];
+        
         switch gladpar.flw_type
             case 'vel'
                 a1=u1;
@@ -307,6 +313,7 @@ for t1 = ti:tj:tf
            
         [Gx, Gy, Gz] = gradient(d);
         speed = reshape(sqrt(sum(u.^2,2)),n);
+        dspeed = reshape(sqrt(sum(du.^2,2)),n);
         speedAug = sqrt(u1.^2 + u2.^2 + u3.^2);
         img_flow = speed.*d;
         drdt_dif = Mdis*d(:);
@@ -321,6 +328,7 @@ for t1 = ti:tj:tf
             pl(:,:,1) = xt;
             plrho(:,1) = d(sub2ind(n,sy,sx,sz));
             plspd(:,1) = speed(sub2ind(n,sy,sx,sz));
+            pldspd(:,1) = dspeed(sub2ind(n,sy,sx,sz));
             plaugspd(:,1) = speedAug(sub2ind(n,sy,sx,sz));
             plt(:,1) = step;%tstep;
             plflx(:,1) = img_flow(sub2ind(n,sy,sx,sz));
@@ -348,9 +356,12 @@ for t1 = ti:tj:tf
             step = step + 1;
             V_interp = interp_vel(V,n,xt(:,1),xt(:,2),xt(:,3),[h1,h2,h3]);
             u_interp = interp_vel(u,n,xt(:,1),xt(:,2),xt(:,3),[h1,h2,h3]);
+            du_interp = interp_vel(du,n,xt(:,1),xt(:,2),xt(:,3),[h1,h2,h3]);
+            
             conc_interp = interpF(d,n,xt(:,1),xt(:,2),xt(:,3),[h1,h2,h3]);
             spdAug_interp = sqrt(sum(V_interp.^2,2));
             spd_interp = sqrt(sum(u_interp.^2,2));
+            dspd_interp = sqrt(sum(du_interp.^2,2));
             flx_interp = interpF(img_flow,n,xt(:,1),xt(:,2),xt(:,3),[h1,h2,h3]);
             dr_interp = interpF(drdt,n,xt(:,1),xt(:,2),xt(:,3),[h1,h2,h3]);
             
@@ -373,6 +384,7 @@ for t1 = ti:tj:tf
                 pl(thrsh_ind,:,step) = xt(thrsh_ind,:);
                 plrho(thrsh_ind,step)  = conc_interp(thrsh_ind);
                 plspd(thrsh_ind,step) = spd_interp(thrsh_ind);
+                pldspd(thrsh_ind,step) = dspd_interp(thrsh_ind);
                 plaugspd(thrsh_ind,step) = spdAug_interp(thrsh_ind);
                 plt(thrsh_ind,step) =  step;
                 plflx(thrsh_ind,step) = flx_interp(thrsh_ind);
@@ -397,6 +409,7 @@ for sli = 1:npoints
         
         plr_cur = plrho(sli,aind)';
         pls_cur = plspd(sli,aind)';
+        plds_cur = pldspd(sli,aind)';
         plas_cur = plaugspd(sli,aind)';
         plt_cur = plt(sli,aind)';
         plflx_cur = plflx(sli,aind)';
@@ -404,10 +417,12 @@ for sli = 1:npoints
         
         RHO_SL{pli} = plr_cur(ia);
         SPD_SL{pli} = pls_cur(ia);
+        DSPD_SL{pli} = plds_cur(ia);
         AUGSPD_SL{pli} = plas_cur(ia);
         T_SL{pli} = plt_cur(ia);
         FLX_SL{pli} = plflx_cur(ia);
         dR_SL{pli} = pldr_cur(ia);
+        PE_SL{pli} = pls_cur(ia)./(plds_cur(ia)+eps);
     end
 end
 
@@ -415,20 +430,24 @@ end
 SL = SL(1:pli);
 RHO_SL = RHO_SL(1:pli);
 SPD_SL = SPD_SL(1:pli);
+DSPD_SL = DSPD_SL(1:pli);
 AUGSPD_SL = AUGSPD_SL(1:pli);
 T_SL = T_SL(1:pli);
 FLX_SL = FLX_SL(1:pli);
 dR_SL = dR_SL(1:pli);
+PE_SL = PE_SL(1:pli);
 
 sl_euc = cellfun(@(x) sqrt(sum((x(end,:)-x(1,:)).^2)),SL);% getcell array with euclidean length of sl between first and last point
 %figure, histogram(sl_euc),title('sl-euc'),axis tight;
 SL2 = SL(sl_euc>gladpar.sl_tol);%only keep streamlines whose Euclidean length between first and last points is larger than the threshold
 rstream2 = RHO_SL(sl_euc>gladpar.sl_tol);
 sstream2 = SPD_SL(sl_euc>gladpar.sl_tol);
+dsstream2 = DSPD_SL(sl_euc>gladpar.sl_tol);
 asstream2 = AUGSPD_SL(sl_euc>gladpar.sl_tol);
 tstream2 = T_SL(sl_euc>gladpar.sl_tol);
 fstream2 = FLX_SL(sl_euc>gladpar.sl_tol);
 dstream2 = dR_SL(sl_euc>gladpar.sl_tol);
+pestream2 = PE_SL(sl_euc>gladpar.sl_tol);
 
 fprintf(' # of start points = %d\n # of effective pathlines after pathline-number (pln) threshold = %d \n # of effective pathlines after Euclidean dist (sl_tol) threshold = %d\n',npoints,pli,length(SL2))
 pl_cur = cellfun(@(x) x(:,[2,1,3]),SL2,'UniformOutput',false);
@@ -493,6 +512,7 @@ switch type
         c = zeros(n);%clusters
         r = zeros(n);%density
         s = zeros(n);%speed
+        ds = zeros(n);%diffusive speed
         as = zeros(n);%augspeed
         tt = zeros(n);%time step
         ff = zeros(n);%flux
@@ -505,6 +525,7 @@ switch type
             slines_tmp = pl_cur([sli{I(ind_clus)}]+1);
             rlines_tmp = rstream2([sli{I(ind_clus)}]+1);
             spdlines_tmp = sstream2([sli{I(ind_clus)}]+1);
+            dspdlines_tmp = dsstream2([sli{I(ind_clus)}]+1);
             aspdlines_tmp = asstream2([sli{I(ind_clus)}]+1);
             tlines_tmp = tstream2([sli{I(ind_clus)}]+1);
             flines_tmp = fstream2([sli{I(ind_clus)}]+1);
@@ -529,6 +550,7 @@ switch type
                 [sline,ia,~] = unique(sline, 'rows', 'stable');
                 rsl = rlines_tmp{ind_line}(ia);
                 ssl = spdlines_tmp{ind_line}(ia);
+                dssl = dspdlines_tmp{ind_line}(ia);
                 assl = aspdlines_tmp{ind_line}(ia);
                 tsl = tlines_tmp{ind_line}(ia);
                 fsl = flines_tmp{ind_line}(ia);
@@ -548,6 +570,7 @@ switch type
                 c(inds) = ind_clus*1;
                 r(inds) = rsl;
                 s(inds) = ssl;
+                ds(inds) = dssl;
                 as(inds) = assl;
                 tt(inds) = tsl;
                 ff(inds) = fsl;
@@ -577,6 +600,7 @@ switch type
             c(~msk) = 0;
             r(~msk) = 0;
             s(~msk) = 0;
+            ds(~msk) = 0;
             as(~msk) = 0;
             tt(~msk) = 0;
             ff(~msk) = 0;
@@ -592,10 +616,15 @@ switch type
             c(msk_brain==0) = 0;
             r(msk_brain==0) = 0;
             s(msk_brain==0) = 0;
+            ds(msk_brain==0) = 0;
             as(msk_brain==0) = 0;
             tt(msk_brain==0) = 0;
             ff(msk_brain==0) = 0;
             drt(msk_brain==0) = 0;
+            
+            Pe = s./ds;
+            Pe(isnan(Pe)) = 0;
+            Pe(Pe==Inf) = 0;
             
             maskCluster.img(round(dpar.x_range(1)*dpar.size_factor):round(dpar.x_range(end)*dpar.size_factor),round(dpar.y_range(1)*dpar.size_factor):round(dpar.y_range(end)*dpar.size_factor),round(dpar.z_range(1)*dpar.size_factor):round(dpar.z_range(end)*dpar.size_factor)) = c;
             maskRho.img(round(dpar.x_range(1)*dpar.size_factor):round(dpar.x_range(end)*dpar.size_factor),round(dpar.y_range(1)*dpar.size_factor):round(dpar.y_range(end)*dpar.size_factor),round(dpar.z_range(1)*dpar.size_factor):round(dpar.z_range(end)*dpar.size_factor)) = r;
@@ -604,14 +633,20 @@ switch type
             maskTime.img(round(dpar.x_range(1)*dpar.size_factor):round(dpar.x_range(end)*dpar.size_factor),round(dpar.y_range(1)*dpar.size_factor):round(dpar.y_range(end)*dpar.size_factor),round(dpar.z_range(1)*dpar.size_factor):round(dpar.z_range(end)*dpar.size_factor)) = tt;
             maskFlux.img(round(dpar.x_range(1)*dpar.size_factor):round(dpar.x_range(end)*dpar.size_factor),round(dpar.y_range(1)*dpar.size_factor):round(dpar.y_range(end)*dpar.size_factor),round(dpar.z_range(1)*dpar.size_factor):round(dpar.z_range(end)*dpar.size_factor)) = ff;
             maskdRho.img(round(dpar.x_range(1)*dpar.size_factor):round(dpar.x_range(end)*dpar.size_factor),round(dpar.y_range(1)*dpar.size_factor):round(dpar.y_range(end)*dpar.size_factor),round(dpar.z_range(1)*dpar.size_factor):round(dpar.z_range(end)*dpar.size_factor)) = drt;
+            maskPe.img(round(dpar.x_range(1)*dpar.size_factor):round(dpar.x_range(end)*dpar.size_factor),round(dpar.y_range(1)*dpar.size_factor):round(dpar.y_range(end)*dpar.size_factor),round(dpar.z_range(1)*dpar.size_factor):round(dpar.z_range(end)*dpar.size_factor)) = Pe;
         else
             c(msk_brain==0) = 0;
             r(msk_brain==0) = 0;
             s(msk_brain==0) = 0;
+            ds(msk_brain==0) = 0;
             as(msk_brain==0) = 0;
             tt(msk_brain==0) = 0;
             ff(msk_brain==0) = 0;
             drt(msk_brain==0) = 0;
+            
+            Pe = s./ds;
+            Pe(isnan(Pe)) = 0;
+            Pe(Pe==Inf) = 0;
             
             maskCluster.img(dpar.x_range,dpar.y_range,dpar.z_range) = c;
             maskRho.img(dpar.x_range,dpar.y_range,dpar.z_range) = r;
@@ -620,6 +655,7 @@ switch type
             maskTime.img(dpar.x_range,dpar.y_range,dpar.z_range) = tt;
             maskFlux.img(dpar.x_range,dpar.y_range,dpar.z_range) = ff;
             maskdRho.img(dpar.x_range,dpar.y_range,dpar.z_range) = drt;
+            maskPe.img(dpar.x_range,dpar.y_range,dpar.z_range) = Pe;
         end
         
         
@@ -632,9 +668,10 @@ switch type
         %save_untouch_nii(maskTime,sprintf('%s/%s/%s_LagTime_E%02d_%02d_%s_%s.nii',ppar.out_dir,outdir,tag,ti,tf+tj,paper_fig_str,date_str));
         %save_untouch_nii(maskFlux,sprintf('%s/%s/%s_LagRhoFlux_E%02d_%02d_%s_%s.nii',ppar.out_dir,outdir,tag,ti,tf+tj,paper_fig_str,date_str));
         %save_untouch_nii(maskdRho,sprintf('%s/%s/%s_LagdRhodt_E%02d_%02d_%s_%s.nii',ppar.out_dir,outdir,tag,ti,tf+tj,paper_fig_str,date_str));
+        save_untouch_nii(maskPe,sprintf('%s/%s/%s_LagPe_E%02d_%02d_%s_%s.nii',ppar.out_dir,outdir,tag,ti,tf+tj,paper_fig_str,date_str));
         
         %fprintf('For Speed Map, the next step is to visualize the speed nifty file in Amira.\nHowever, we can still plot in Matlab\n')
-        fprintf('Speed Map in nifty format saved in %s/%s\n\n',ppar.out_dir,outdir)
+        fprintf('Speed and Peclet Map in nifty format saved in %s/%s\n\n',ppar.out_dir,outdir)
         
         %% Visualization
         x = 1:n(1);
@@ -656,6 +693,23 @@ switch type
         colorbar, grid on,
 
         saveas(gcf, sprintf('%s/%s/%s_LagSpeed_E%02d_%02d.png',ppar.out_dir,outdir,tag,ti,tf+tj)); 
+        
+        figure,
+        hs=slice(y,x,z,Pe,x,y,z); 
+        set(hs,'EdgeColor','none','FaceColor','interp','FaceAlpha',0.04);
+        alpha('color'),alphamap(linspace(0,1,100))
+        title(sprintf('Test: tag = %s, Peclet Map',tag),'Fontsize',20)
+        grid off, box off, axis image
+        xlabel('x-axis')
+        ylabel('y-axis')
+        zlabel('z-axis')
+        colormap(jet)
+        caxis([0,200])
+        view([-188.3500   13.7463])
+        set(gca,'Color',[0.85,0.85,0.93]), set(gcf,'unit','normalized','position',[0.1,1,0.4,0.5],'Color',[0.85,0.85,0.93]), set(gcf, 'InvertHardcopy', 'off')
+        colorbar, grid on,
+
+        saveas(gcf, sprintf('%s/%s/%s_LagPe_E%02d_%02d.png',ppar.out_dir,outdir,tag,ti,tf+tj)); 
     case 'v'
 
         outversion = sprintf('%s_%s',paper_fig_str,date_str);
@@ -705,12 +759,18 @@ switch type
         
         % save to vtk
         SL_tmp = SL(indb);
+        PE_tmp = pestream2(indb);
+        S_tmp = sstream2(indb);
         vtkwrite_pathlines(sprintf('%s/%s/%s_pathlines_lentol_%.1f_jp_%d_%s.vtk',ppar.out_dir,outdir,tag,gladpar.sl_tol,gladpar.jp,outversion),'polydata','lines',SL_tmp(1:gladpar.jp:end));
+        vtkwrite_spdlines(sprintf('%s/%s/%s_Pelines_lentol_%.1f_jp_%d_%s.vtk',ppar.out_dir,outdir,tag,gladpar.sl_tol,gladpar.jp,outversion),'polydata','lines',SL_tmp(1:gladpar.jp:end),PE_tmp(1:gladpar.jp:end));
+        vtkwrite_spdlines(sprintf('%s/%s/%s_Spdlines_lentol_%.1f_jp_%d_%s.vtk',ppar.out_dir,outdir,tag,gladpar.sl_tol,gladpar.jp,outversion),'polydata','lines',SL_tmp(1:gladpar.jp:end),S_tmp(1:gladpar.jp:end));
         vtkwrite(sprintf('%s/%s/%s_disp_lentol_%.2f_%s.vtk',ppar.out_dir,outdir,tag,gladpar.sl_tol,outversion), 'structured_grid', PATH.startp(indb,1), PATH.startp(indb,2), PATH.startp(indb,3), ... 
             'vectors', 'vector_field', PATH.disp(indb,1), PATH.disp(indb,2), PATH.disp(indb,3));
         vtkwrite(sprintf('%s/%s/%s_anato_%s.vtk',ppar.out_dir,outdir,tag,outversion), 'structured_points', 'mask', anato);
         
+        fprintf('Pathlines and Flux vectors in vtk format saved in %s/%s\n\n',ppar.out_dir,outdir)
         %% NCA
+        %{
         [xx, yy, zz] = meshgrid(1:n(2),1:n(1),1:n(3));
 
         startpind = sub2ind(n,round(PATH.startp(:,1)),round(PATH.startp(:,2)),round(PATH.startp(:,3)));
@@ -818,6 +878,7 @@ switch type
             'vectors', 'vector_field', PATH.disp(InDdiff,1), PATH.disp(InDdiff,2), PATH.disp(InDdiff,3));
         
         fprintf('Flux vectors in vtk format saved in %s/%s\n\n',ppar.out_dir,outdir)
+        %}
 end
 
 end
