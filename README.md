@@ -9,6 +9,7 @@ where (1) runs the main rOMT model on the dataset and (2-3) post-processes the r
 For detailed mathematical derivation and explaination of (1), please go to https://github.com/xinan-nancy-chen/rOMT/tree/main/rOMT_code_details.pdf in the current folder.<br />
 
 ![pipeline](ppl.png)
+This figure shows the pipeline of the project where step a is (1) and step b-f are (2).
 
 ## System Requirements
 The code was mainly written and ran in Matlab (R2018a for rOMT algorithm and R2019b for post-processing), with a small section in GLaD analysis ran with Python 3.7.3. 
@@ -111,12 +112,12 @@ _________________________________________________________
 
 
 === What result do you want to extract? === 
-Type "s" for speed map, "v" for flux vectors, "b" for both. 
+Type "s" for speed and Peclet maps, "v" for pathlines w./w.o. endowed values, "b" for both. 
 Then press Enter to continue
 ```
 Follow the instructions to choose what post-processing result you would like to run.<br />
 
-Type 1: For speed map, you will need to run a script of Python, before which you will see output like:
+Type 1: For speed and Péclet maps, you will need to run a script of Python, before which you will see output like:
 ```
 Lagrangian-Pathline (C294 data, mask = 1, affSmooth = 1, dilate = 3), 
 analysis type = speedmap
@@ -160,9 +161,9 @@ Run ```run_dipyQB_pl.py``` by following the instructions and next you will see:
  # of clusters after max-cluster-number (clus_cutoff) threshold = 44
 Speed Map in nifty format saved in ../rOMT/test_results/C294/diff_2e3_mask_1_tj_3_dt_0.4_nt_10_ti_31_tf_49_uini_0_rini_none_beta_0.0001_R_gamma_0.008_correctHu_dtri1_tinterp0_rmin0_rnorm0_rsmooth1_rreinit0_source0_dilate3_pcg20/LPPA_set001_032821
 ```
-A 3D rendering of the speed map will be plotted in Matlab, and a file in nifty format will be saved into the above directory which could be best visualized in Amira. <br />
+3D rendering of the speed and Péclet maps will be plotted in Matlab, and a file in nifty format will be saved into the above directory which could be best visualized in Amira. <br />
 
-Type 2: For flux vectors, you will see output like:
+Type 2: For pathlines w./w.o. endowed values and flux vectors, you will see output like:
 ```
 Lagrangian-Pathline (C294 data, mask = 1, affSmooth = 1, dilate = 3), 
 analysis type = vectors
@@ -192,14 +193,14 @@ t = 70 (t1 = 49, t2 = 10 -> T = 51.700)
 C294: LPPA_set002_032821 Directory exists :)
 Total original 10450 pathlines
 After further dilate to add more ADV, 1084 vectors are added among 4509 candidates to 4991 already ADV vectors
-Flux vectors in vtk format saved in ../rOMT/test_results/C294/diff_2e3_mask_1_tj_3_dt_0.4_nt_10_ti_31_tf_49_uini_0_rini_none_beta_0.0001_R_gamma_0.008_correctHu_dtri1_tinterp0_rmin0_rnorm0_rsmooth1_rreinit0_source0_dilate3_pcg20/LPPA_set002_032821
+Pathlines and Flux vectors in vtk format saved in ../rOMT/test_results/C294/diff_2e3_mask_1_tj_3_dt_0.4_nt_10_ti_31_tf_49_uini_0_rini_none_beta_0.0001_R_gamma_0.008_correctHu_dtri1_tinterp0_rmin0_rnorm0_rsmooth1_rreinit0_source0_dilate3_pcg20/LPPA_set002_032821
 ```
 Files in vtk format will be saved into the above directory which could be best visualized in VisIt:<br />
 
 (1) Open VisIt and clike "Open" icon to load data.<br />
 (2) Load anatomical data ("anato") -> Add -> Volume -> mask -> Draw. Then double click the item to change attributes of colormap and transparency.<br />
-(3) Load vectors ("ADV", "DIFF","disp") -> Add -> Vector -> vector_field -> Draw. Then double click the item to change attributes of colormap, vector amount and scale.<br />
-(4) Load pathlines ("pathlines") -> Pseudocolor -> PathPoint -> Draw.<br />
+(3) Load vectors ("disp") -> Add -> Vector -> vector_field -> Draw. Then double click the item to change attributes of colormap, vector amount and scale.<br />
+(4) Load pathlines ("pathlines") -> Pseudocolor -> PathPoint -> Draw. Then double click the item to change attributes of colormap and limits. <br />
 (5) Clike "Hide/Show" to overlay different layers.<br />
 
 ![VisIt](VisIt.png)
