@@ -21,7 +21,7 @@ function im_out = nii2mat(data_path,x1_range,x2_range,x3_range,size_factor,up_th
 
 
 
-addpath('../../Visualization/MATLAB MRI display/NIfTI_analyze/');
+%addpath('../../Visualization/MATLAB MRI display/NIfTI_analyze/');
 
 switch nargin 
     case 5
