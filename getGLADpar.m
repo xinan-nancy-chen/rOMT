@@ -80,10 +80,10 @@ switch dpar.dataset_name
                 end
                 
             case 'v'
-                gladpar.do_sp = 0; %1 if use sp from max(dpsnrv)>sp_thresh, 0 o/w
+                gladpar.do_sp = 1; %1 if use sp from max(dpsnrv)>sp_thresh, 0 o/w
                 gladpar.sp_thresh = 12;
                 
-                gladpar.mdt = 10;
+                gladpar.mdt = 1;
                 gladpar.sl_tol = 2; %threshold for minimum Euclidean length between initial and final streamline points                
                 gladpar.spType = 'ordered'; %'uniform' (default: 'ordered'); %'ordered': every fs-th possible sp is used (default)sp distribution; 'uniform': sp chosen according to uniform distribution
                 switch gladpar.spType
