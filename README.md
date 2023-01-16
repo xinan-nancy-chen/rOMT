@@ -7,6 +7,8 @@ where (1) runs the main rOMT model on the dataset and (2) post-processes the res
 
 For detailed mathematical derivation and explaination of (1), please go to https://github.com/xinan-nancy-chen/rOMT/tree/main/rOMT_code_details.pdf in the current folder.<br />
 
+Contact Xinan Chen at chenx7@mskcc.org for questions.<br />
+
 ![pipeline](ppl.png)
 This figure shows the pipeline of the project where step a is (1) and step b-f are (2).
 
@@ -204,5 +206,5 @@ Files in vtk format will be saved into the above directory which could be best v
 
 ![VisIt](VisIt_exp.png)
 
-The above interface demonstrates the results from the original data. The paramters for running on the original large dataset can be found in the comment of ```getParams.m``` and the whole dataset is available upon request at <xinan.chen@stonybrook.edu> or <helene.benveniste@yale.edu>.
+The above interface demonstrates the results from the original data. The paramters for running on the original large dataset can be found in the comment of ```getParams.m``` and the whole dataset is available upon request at <xinan.chen@stonybrook.edu>/<chenx7@mskcc.org> or <helene.benveniste@yale.edu>.
 
