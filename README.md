@@ -20,6 +20,11 @@ where a temporal dimension $t\in[0,T]$ is added to the transport process. In the
 
 For detailed mathematical derivation and explaination of (1), please go to https://github.com/xinan-nancy-chen/rOMT/tree/main/rOMT_code_details.pdf in the current folder.<br />
 
+The published paper of this project can be found at
+> -- <cite>[Cerebral amyloid angiopathy is associated with glymphatic transport reduction and time-delayed solute drainage along the neck arteries][2]</cite>.
+
+[2]: https://www.nature.com/articles/s43587-022-00181-4
+
 Contact Xinan Chen at chenx7@mskcc.org for questions.<br />
 
 ![pipeline](ppl.png)
