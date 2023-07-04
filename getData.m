@@ -4,7 +4,7 @@ function im_out = getData(data_tag,tind,tinterp)
 %               01/23/2017
 %               01/26/2017
 
-addpath('../../Visualization/MATLAB MRI display/NIfTI_analyze/');
+%addpath('../../Visualization/MATLAB MRI display/NIfTI_analyze/');
 
 if nargin < 1
     data_tag = 'C294';
