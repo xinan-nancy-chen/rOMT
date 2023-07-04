@@ -1,7 +1,7 @@
 % This is the driver for the rOMT algorithm
 % parameters of rOMT is defined in getPamams.m
 
-addpath('utilities', 'Sensitivities','Inverse');
+addpath(genpath('utilities', 'Sensitivities','Inverse'));
 
 tag = 'C294';
 
