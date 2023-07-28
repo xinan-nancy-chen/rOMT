@@ -27,14 +27,14 @@ switch data_name
         path_par.anato = './data/12_MONTH_DATA/psnrv/WT/C294/pbase_snrv_C294_031318A_DOTA37_30ul_E53.nii';
         
         path_par.sp_mask_opts(1).name = 'brain';
-        path_par.sp_mask_opts(1).path = '../../data/12_MONTH_DATA/12months_mask_brainCSF/C294.nii';
+        path_par.sp_mask_opts(1).path = './data/12_MONTH_DATA/12months_mask_brainCSF/C294.nii';
         
         data_par.dataset_name = 'CAA';
         data_par.name = 'C294';
         data_par.mask_number = 1;
         switch data_par.mask_number
             case 1%head mask
-                path_par.data_mask_path = '../../data/12_MONTH_DATA/masksforOMT/WT/C294_MASK.nii';
+                path_par.data_mask_path = './data/12_MONTH_DATA/masksforOMT/WT/C294_MASK.nii';
                 data_par.x_range = 20:80;%22:78;
                 data_par.y_range = 1:106;%1:106;
                 data_par.z_range = 39:85;%41:83;
@@ -101,14 +101,14 @@ switch data_name
         path_par.anato = './data/12_MONTH_DATA/psnrv/WT/C294/pbase_snrv_C294_031318A_DOTA37_30ul_E53.nii';
         
         path_par.sp_mask_opts(1).name = 'brain';
-        path_par.sp_mask_opts(1).path = '../../data/12_MONTH_DATA/12months_mask_brainCSF/C294.nii';
+        path_par.sp_mask_opts(1).path = './data/12_MONTH_DATA/12months_mask_brainCSF/C294.nii';
         
         data_par.dataset_name = 'CAA';
         data_par.name = 'C294';
         data_par.mask_number = 1;
         switch data_par.mask_number
             case 1%head mask
-                path_par.data_mask_path = '../../data/12_MONTH_DATA/masksforOMT/WT/C294_MASK.nii';
+                path_par.data_mask_path = './data/12_MONTH_DATA/masksforOMT/WT/C294_MASK.nii';
                 data_par.x_range = 20:80;%22:78;
                 data_par.y_range = 1:106;%1:106;
                 data_par.z_range = 39:85;%41:83;
